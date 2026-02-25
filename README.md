@@ -83,16 +83,16 @@ n = int(sys.argv[1])
 if n < 1:
     sys.exit(sys.argv[0] + ": Expecting a positive integer")
 
-smallest_prime_factor = None
+x = None
 for i in range(2, n):
     if (n % i) == 0:
-        smallest_prime_factor = i
+        x = i
         break
 
-if smallest_prime_factor is None:
+if x is None:
     print(n)
 else:
-    print(smallest_prime_factor)
+    print(x)
 ```
 
 Let's run it as a script and see what happens:
@@ -119,7 +119,49 @@ before proceeding:
     $ git checkout -- smallest_factor.py
 
 
-# Best practice 1: Put code into functions
+# Best practice 1: Write expressive code
+
+Our variable names are not very expressive to a human trying to read and
+understand our code.
+For example, the variable name `x` does not give someone reading our code any
+hints about what the code is doing.
+Let's improve our code by changing `x` to a more expressive variable name.
+
+Let's edit this part of our code:
+
+```python
+x = None
+for i in range(2, n):
+    if (n % i) == 0:
+        x = i
+        break
+
+if x is None:
+    print(n)
+else:
+    print(x)
+```
+
+to give `x` a better variable name:
+
+```python
+smallest_prime_factor = None
+for i in range(2, n):
+    if (n % i) == 0:
+        smallest_prime_factor = i
+        break
+
+if smallest_prime_factor is None:
+    print(n)
+else:
+    print(smallest_prime_factor)
+```
+
+The variable name `smallest_prime_factor` gives someone reading our code a much
+better idea of what the code is trying to do.
+
+
+# Best practice 2: Put code into functions
 
 It is always good practice to put each block of code that performs
 a particular task into a function.
@@ -188,7 +230,7 @@ but they are very helpful and informative, so read them carefully
 and try to figure out what is going wrong.
 
 
-# Best practice 2: Write modules not scripts
+# Best practice 3: Write modules not scripts
 
 What if we want to use the `get_smallest_prime_factor` function in other 
 scripts we are writing?
@@ -292,7 +334,7 @@ Hit the `q` key to exit the help menu.
 Hmmm... our help messages are not very ... helpful. Let's fix that next.
 
 
-# Best practice 3: Use docstrings to document your code
+# Best practice 4: Use docstrings to document your code
 
 First, let's change our comment at the top of the script to a docstring.
 
@@ -351,7 +393,7 @@ Now, let's check our help messages again:
 Much better.
 
 
-# Best practice 4: Add tests to your docstrings
+# Best practice 5: Add tests to your docstrings
 
 We can even add examples to docstrings that can be run
 as tests!!
